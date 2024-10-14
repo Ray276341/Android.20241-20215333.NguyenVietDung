@@ -1,0 +1,3 @@
+Em tìm theo hướng dẫn của thầy lên nguồn ban đầu thì em thấy người ta nói là đã outdated, nên sau đó em làm theo hướng dẫn mới. 
+Sản phẩm nhìn chung vẫn tương tự như trong file cũ của thầy, có khác một chút mong thầy chấp nhận bài của em ạ.
+Link github: https://github.com/Ray276341/Android.20241-20215333.NguyenVietDung

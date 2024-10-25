@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/sourceAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập số tiền"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <Spinner
+        android:id="@+id/sourceCurrencySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"
+        android:background="?android:attr/selectableItemBackground" /> <!-- Thêm nền để tăng kích thước vùng chạm -->
+
+    <EditText
+        android:id="@+id/convertedAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số tiền quy đổi"
+        android:focusable="false"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <Spinner
+        android:id="@+id/targetCurrencySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:minHeight="48dp"
+        android:background="?android:attr/selectableItemBackground" /> <!-- Thêm nền để tăng kích thước vùng chạm -->
+
+</LinearLayout>

@@ -52,20 +52,24 @@ class StudentListFragment : Fragment() {
                 return true
             }
             R.id.remove_student -> {
-                StudentData.studentList.removeAt(info.position)
+                val student = StudentData.getAllStudents()[info.position]
+                StudentData.deleteStudent(student.id)
                 updateListView()
                 return true
             }
+
         }
         return super.onContextItemSelected(item)
     }
 
     private fun updateListView() {
+        val students = StudentData.getAllStudents()
         adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1,
-            StudentData.studentList.map { "${it.name} - ${it.studentId}" }
+            students.map { "${it.name} - ${it.studentId}" }
         )
         listView.adapter = adapter
     }
+
 }

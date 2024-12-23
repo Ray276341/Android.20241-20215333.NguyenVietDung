@@ -27,10 +27,11 @@ class AddStudentFragment : Fragment() {
             val name = nameInput.text.toString()
             val studentId = studentIdInput.text.toString()
             if (name.isNotBlank() && studentId.isNotBlank()) {
-                StudentData.studentList.add(Student(name, studentId))
+                StudentData.addStudent(Student(name, studentId))
                 findNavController().navigateUp()
             }
         }
+
 
         return view
     }

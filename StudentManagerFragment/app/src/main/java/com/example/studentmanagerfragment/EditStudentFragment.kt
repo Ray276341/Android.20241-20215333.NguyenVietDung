@@ -33,13 +33,14 @@ class EditStudentFragment : Fragment() {
 
         saveButton.setOnClickListener {
             if (position != -1) {
-                StudentData.studentList[position].apply {
-                    name = nameInput.text.toString()
-                    studentId = studentIdInput.text.toString()
-                }
+                val student = StudentData.getAllStudents()[position]
+                student.name = nameInput.text.toString()
+                student.studentId = studentIdInput.text.toString()
+                StudentData.updateStudent(student.id, student)
                 findNavController().navigateUp()
             }
         }
+
 
         return view
     }

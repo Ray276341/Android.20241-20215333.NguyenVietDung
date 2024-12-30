@@ -3,23 +3,24 @@ package com.example.studentmanagerfragment
 import android.content.Context
 
 object StudentData {
-    private lateinit var databaseHelper: StudentDatabaseHelper
+    private lateinit var studentDao: StudentDao
 
     fun initialize(context: Context) {
-        databaseHelper = StudentDatabaseHelper(context)
+        val database = StudentDatabase.getDatabase(context)
+        studentDao = database.studentDao()
     }
 
-    fun getAllStudents(): List<Student> = databaseHelper.getAllStudents()
+    suspend fun getAllStudents(): List<Student> = studentDao.getAllStudents()
 
-    fun addStudent(student: Student) {
-        databaseHelper.addStudent(student)
+    suspend fun addStudent(student: Student) {
+        studentDao.addStudent(student)
     }
 
-    fun updateStudent(id: Int, student: Student) {
-        databaseHelper.updateStudent(id, student)
+    suspend fun updateStudent(student1: Int, student: Student) {
+        studentDao.updateStudent(student)
     }
 
-    fun deleteStudent(id: Int) {
-        databaseHelper.deleteStudent(id)
+    suspend fun deleteStudent(student: Student) {
+        studentDao.deleteStudent(student)
     }
 }

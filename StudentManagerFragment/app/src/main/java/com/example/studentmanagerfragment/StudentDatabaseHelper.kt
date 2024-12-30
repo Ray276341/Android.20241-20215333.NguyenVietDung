@@ -62,7 +62,7 @@ class StudentDatabaseHelper(context: Context) :
         return rowsDeleted
     }
 
-    fun getAllStudents(): List<Student> {
+    /*fun getAllStudents(): List<Student> {
         val studentList = mutableListOf<Student>()
         val query = "SELECT * FROM $TABLE_NAME"
         val db = readableDatabase
@@ -116,6 +116,6 @@ class StudentDatabaseHelper(context: Context) :
             // Mark database as initialized
             sharedPreferences.edit().putBoolean("is_database_initialized", true).apply()
         }
-    }
+    }*/
 
 }

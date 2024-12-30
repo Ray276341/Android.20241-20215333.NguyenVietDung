@@ -1,7 +1,12 @@
 package com.example.studentmanagerfragment
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "students")
 data class Student(
-    var name: String,
-    var studentId: String,
-    var id: Int = -1 // ID mặc định là -1 nếu chưa lưu vào CSDL
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "studentId") var studentId: String
 )

@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 
 class AddStudentFragment : Fragment() {
     private lateinit var nameInput: EditText
@@ -27,7 +29,10 @@ class AddStudentFragment : Fragment() {
             val name = nameInput.text.toString()
             val studentId = studentIdInput.text.toString()
             if (name.isNotBlank() && studentId.isNotBlank()) {
-                StudentData.addStudent(Student(name, studentId))
+                lifecycleScope.launch {
+                    StudentData.addStudent(Student(name = name, studentId = studentId))
+                    findNavController().navigateUp()
+                }
                 findNavController().navigateUp()
             }
         }

@@ -6,7 +6,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 
 class StudentListFragment : Fragment() {
     private lateinit var listView: ListView
@@ -18,7 +20,9 @@ class StudentListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_student_list, container, false)
         listView = view.findViewById(R.id.student_list_view)
 
+        // Update the list of students asynchronously
         updateListView()
+
         registerForContextMenu(listView)
         setHasOptionsMenu(true)
 
@@ -52,24 +56,35 @@ class StudentListFragment : Fragment() {
                 return true
             }
             R.id.remove_student -> {
-                val student = StudentData.getAllStudents()[info.position]
-                StudentData.deleteStudent(student.id)
-                updateListView()
+                // Use lifecycleScope to call getAllStudents asynchronously
+                lifecycleScope.launch {
+                    val students = StudentData.getAllStudents() // Call inside coroutine
+                    val student = students.getOrNull(info.position) // Get the student by position
+
+                    student?.let {
+                        StudentData.deleteStudent(it) // Delete student
+                        updateListView() // Re-fetch and update the list view after deletion
+                    }
+                }
                 return true
             }
-
         }
         return super.onContextItemSelected(item)
     }
 
-    private fun updateListView() {
-        val students = StudentData.getAllStudents()
-        adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            students.map { "${it.name} - ${it.studentId}" }
-        )
-        listView.adapter = adapter
-    }
 
+    private fun updateListView() {
+        lifecycleScope.launch {
+            // Fetch students from the database in a background thread
+            val students = StudentData.getAllStudents()
+
+            // Update UI on the main thread
+            adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                students.map { "${it.name} - ${it.studentId}" }
+            )
+            listView.adapter = adapter
+        }
+    }
 }
